@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key={{gmaps_api_key}}&callback=initMap&libraries=maps,marker&v=beta"
+    defer></script>
+
+  <title>TransitGPT Canada</title>
+
+  <style>
+    body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background-color: #1a1a2e;
+      color: #d1d5db;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 860px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      padding: 30px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      color: #fff;
+      font-size: 2rem;
+      margin: 0 0 6px 0;
+    }
+
+    .header p {
+      color: #9ca3af;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .transit-icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    form.question-form {
+      display: flex;
+      margin-bottom: 24px;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 14px 16px;
+      border: 1px solid #374151;
+      background-color: #16213e;
+      color: #d1d5db;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    input[type="submit"] {
+      padding: 14px 22px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #1d4ed8;
+    }
+
+    .result,
+    .conversation-history {
+      background-color: #16213e;
+      padding: 20px 24px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      color: #d1d5db;
+      border: 1px solid #1e3a5f;
+    }
+
+    .result h2,
+    .conversation-history h2 {
+      margin-top: 0;
+      color: #93c5fd;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .conversation-entry {
+      margin-bottom: 14px;
+      border-bottom: 1px solid #1e3a5f;
+      padding-bottom: 14px;
+    }
+
+    .conversation-entry:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .conversation-entry .question {
+      color: #60a5fa;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .markdown-content {
+      padding: 10px 14px;
+      background-color: #0f172a;
+      border-radius: 6px;
+    }
+
+    pre {
+      background-color: #0f172a;
+      padding: 14px;
+      overflow-x: auto;
+      border-radius: 6px;
+      color: #d1d5db;
+      font-size: 0.88rem;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    th, td {
+      border: 1px solid #1e3a5f;
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background-color: #1e3a5f;
+      color: #93c5fd;
+    }
+
+    .example-questions {
+      background-color: #16213e;
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      border: 1px solid #1e3a5f;
+    }
+
+    .example-questions p {
+      margin: 14px 0 8px 0;
+      color: #60a5fa;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .example-questions p:first-child {
+      margin-top: 0;
+    }
+
+    .example-questions button {
+      background: #0f172a;
+      border: 1px solid #1e3a5f;
+      color: #93c5fd;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin: 4px 4px 4px 0;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .example-questions button:hover {
+      background-color: #1e3a5f;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+    }
+
+    footer input[type="submit"] {
+      padding: 8px 18px;
+      background-color: #374151;
+      color: #9ca3af;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    footer input[type="submit"]:hover {
+      background-color: #4b5563;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <span class="transit-icon">🚌</span>
+      <h1>TransitGPT Canada</h1>
+      <p>Ask anything about Canadian public transit — agencies, routes, stops, and schedules across all provinces.</p>
+    </div>
+
+    <div class="example-questions">
+      <p>🏢 Agencies</p>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">What transit agencies operate in British Columbia?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">List all transit agencies in Quebec</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">How many transit agencies are there in Canada?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Which provinces have the most transit agencies?</button>
+
+      <p>🚌 Routes</p>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">How many routes does the TTC have?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">What are all the TTC streetcar routes?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">What subway lines exist in Canada?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Which agencies offer ferry service in Canada?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">What bus routes does GO Transit operate?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Show me all TransLink routes in Vancouver</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Which agency has the most routes in Canada?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">What light rail routes exist in Canada?</button>
+
+      <p>🗺️ Maps & Stops</p>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Show me stops for OC Transpo on a map</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Show TTC subway stations on a map</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">How many stops does STM have in Montreal?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Show me GO Transit stations on a map</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Find transit stops near CN Tower, Toronto</button>
+
+      <p>📏 Distance & Travel</p>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">How far is Union Station Toronto from Pearson Airport?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">What is the driving distance from Montreal Central Station to Quebec City?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">How far is Vancouver Waterfront Station from Richmond?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Find places to eat near Ottawa's Rideau Centre transit stop</button>
+
+      <p>📅 Schedules & Service</p>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Does the TTC run service on Sundays?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">What days does GO Transit operate?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Which agencies run weekend service?</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">What is the service schedule for STM?</button>
+
+      <p>📊 Charts & Statistics</p>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Show a chart of routes per province</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Show a pie chart of route types across Canada</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Show a bar chart of the top 10 agencies by number of routes</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Show a chart of agencies per province</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">How many bus routes vs rail routes exist in Canada?</button>
+
+      <p>📄 Reports</p>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Generate a PDF report of all transit agencies in Ontario</button>
+      <button onclick="document.querySelector('input[name=question]').value=this.innerText">Generate a PDF summary of ferry services in Canada</button>
+    </div>
+
+    <form method="POST" class="question-form">
+      <input type="text" name="question" placeholder="Ask about Canadian transit agencies, routes, or stops..." required />
+      <input type="submit" value="Ask" />
+    </form>
+
+    {% if result %}
+    <div class="result">
+      <h2>Answer</h2>
+      {% for res in result %}
+      <p>{{ res }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if session.get('conversation_history') %}
+    <div class="conversation-history">
+      <h2>Conversation History</h2>
+      {% for entry in session['conversation_history'] %}
+      <div class="conversation-entry">
+        <p class="question">Q: {{ entry.question }}</p>
+        <div class="markdown-content">
+          <p>A: </p>
+          {% for item in entry.answer %}{{ item | safe }}{% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <footer>
+    <form method="POST">
+      <input type="hidden" name="sign_out" value="true" />
+      <input type="submit" value="Clear Conversation" />
+    </form>
+  </footer>
+</body>
+</html>
