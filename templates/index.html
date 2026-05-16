@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script
-    src="https://maps.googleapis.com/maps/api/js?key={{gmaps_api_key}}&callback=initMap&libraries=maps,marker&v=beta"
+    src="https://maps.googleapis.com/maps/api/js?key={{gmaps_api_key}}&callback=initMap&libraries=places"
     defer></script>
 
   <title>TransitGPT Canada</title>
@@ -226,7 +226,7 @@
       <h1>TransitGPT Canada</h1>
       <p>Ask anything about Canadian public transit — agencies, routes, stops, and schedules across all provinces.</p>
     </div>
-
+<!-- 
     <div class="example-questions">
       <p>🏢 Agencies</p>
       <button onclick="document.querySelector('input[name=question]').value=this.innerText">What transit agencies operate in British Columbia?</button>
@@ -273,7 +273,7 @@
       <p>📄 Reports</p>
       <button onclick="document.querySelector('input[name=question]').value=this.innerText">Generate a PDF report of all transit agencies in Ontario</button>
       <button onclick="document.querySelector('input[name=question]').value=this.innerText">Generate a PDF summary of ferry services in Canada</button>
-    </div>
+    </div> -->
 
     <form method="POST" class="question-form">
       <input type="text" name="question" placeholder="Ask about Canadian transit agencies, routes, or stops..." required />

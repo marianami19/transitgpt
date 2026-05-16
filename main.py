@@ -4,7 +4,7 @@ import re
 from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_openai import ChatOpenAI
 from prefix import SQL_PREFIX
-from boilerplate import directions_sql_boilerplate, map_boilerplate, stop_marker_boilerplate
+from boilerplate import directions_sql_boilerplate, map_boilerplate, stop_marker_boilerplate, directions_map_boilerplate
 from langchain_core.messages import SystemMessage, HumanMessage
 from langgraph.prebuilt import create_react_agent
 from tools import setup_tools
@@ -29,6 +29,7 @@ prefix = SQL_PREFIX.format(
     map_boilerplate=map_boilerplate,
     stop_marker_boilerplate=stop_marker_boilerplate,
     directions_sql_boilerplate=directions_sql_boilerplate,
+    directions_map_boilerplate=directions_map_boilerplate,
 )
 
 system_message = SystemMessage(content=prefix)

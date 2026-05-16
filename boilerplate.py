@@ -26,6 +26,35 @@ initMap();
 </script>
 ```"""
 
+directions_map_boilerplate = """```html
+<div id="map" style="height: 500px; width: 100%;"></div>
+<script>
+function initMap() {
+    const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: { lat: ORIGIN_LAT, lng: ORIGIN_LNG }
+    });
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer({ map: map });
+    directionsService.route(
+        {
+            origin: 'ORIGIN_ADDRESS_STRING',
+            destination: 'DESTINATION_ADDRESS_STRING',
+            travelMode: google.maps.TravelMode.TRAVEL_MODE_VALUE
+        },
+        function(result, status) {
+            if (status === 'OK') {
+                directionsRenderer.setDirections(result);
+            } else {
+                console.error('Directions failed: ' + status);
+            }
+        }
+    );
+}
+initMap();
+</script>
+```"""
+
 stop_marker_boilerplate = (
     "{ lat: [stop.stop_lat], lng: [stop.stop_lon],"
     " label: '[stop.stop_name] ([stop.stop_code])' }"

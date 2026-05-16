@@ -205,11 +205,34 @@ If the user asks to see stops or routes on a map, use Google Maps.
 - Add a label to each marker with the stop name.
 - Wrap the output in a ```html code block.
 
-Marker format for each stop:
-{stop_marker_boilerplate}
+TWO TYPES OF MAPS — use the correct one:
 
-Example map initialization structure:
-{map_boilerplate}
+1. STOPS / LOCATIONS MAP — use this when showing stops, stations, or points of interest.
+   Draws markers only. Use {map_boilerplate}
+   Marker format: {stop_marker_boilerplate}
+
+2. ROUTE MAP — use this when showing a route or directions between two places.
+
+   CRITICAL RULES FOR ROUTE MAPS — follow exactly, no exceptions:
+   - NEVER place manual markers. NEVER draw a polyline or straight line.
+   - ALWAYS use DirectionsService + DirectionsRenderer.
+     DirectionsRenderer draws the route line AND the origin/destination markers automatically.
+   - Copy this code exactly and only replace the four placeholder values:
+
+{directions_map_boilerplate}
+
+   The four values to replace:
+   a) ORIGIN_LAT       — float, geocoded latitude of origin       e.g. 44.3864
+   b) ORIGIN_LNG       — float, geocoded longitude of origin      e.g. -79.6894
+   c) ORIGIN_ADDRESS_STRING      — full address string in quotes  e.g. 'Barrie Allandale Waterfront GO Station, Barrie, ON'
+   d) DESTINATION_ADDRESS_STRING — full address string in quotes  e.g. 'Johnson St at Mayor Ave, Barrie, ON'
+   e) TRAVEL_MODE_VALUE — one of: TRANSIT, DRIVING, WALKING, BICYCLING  (no quotes, no dot prefix)
+
+   Example of a correctly filled-in route map:
+   center: {{ lat: 44.3864, lng: -79.6894 }}
+   origin: 'Barrie Allandale Waterfront GO Station, Barrie, ON'
+   destination: 'Johnson St at Mayor Ave, Barrie, ON'
+   travelMode: google.maps.TravelMode.TRANSIT
 
 =====================
 PDF REPORTS
