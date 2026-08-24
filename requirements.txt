@@ -1,4 +1,5 @@
 faiss-cpu==1.9.0.post1
+gunicorn==22.0.0
 Flask==3.0.3
 Flask-Cors==4.0.1
 googlemaps==4.10.0
