@@ -1,6 +1,6 @@
 import ast
 import re
-from langchain_core.tools.retriever import create_retriever_tool
+from langchain.tools.retriever import create_retriever_tool
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
