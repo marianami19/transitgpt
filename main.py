@@ -15,13 +15,15 @@ from reportlab.pdfgen import canvas
 
 load_dotenv()
 
-POSTGRES_USER = os.getenv("PG_USER")
-POSTGRES_PASSWORD = os.getenv("PG_PASSWORD")
-POSTGRES_HOST = os.getenv("PG_HOST", "localhost")
-POSTGRES_PORT = os.getenv("PG_PORT")
-POSTGRES_DB = os.getenv("TRANSIT_PG_DB", "transit_gpt")
-
-connection_string = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+connection_string = os.getenv("DATABASE_URL") or (
+    "postgresql://{user}:{password}@{host}:{port}/{db}".format(
+        user=os.getenv("PG_USER"),
+        password=os.getenv("PG_PASSWORD"),
+        host=os.getenv("PG_HOST", "localhost"),
+        port=os.getenv("PG_PORT", "5432"),
+        db=os.getenv("TRANSIT_PG_DB", "transit_gpt"),
+    )
+)
 
 db = SQLDatabase.from_uri(connection_string)
 llm = ChatOpenAI(model="gpt-4o-mini")
