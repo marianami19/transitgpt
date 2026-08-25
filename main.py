@@ -17,10 +17,11 @@ load_dotenv()
 
 POSTGRES_USER = os.getenv("PG_USER")
 POSTGRES_PASSWORD = os.getenv("PG_PASSWORD")
+POSTGRES_HOST = os.getenv("PG_HOST", "localhost")
 POSTGRES_PORT = os.getenv("PG_PORT")
 POSTGRES_DB = os.getenv("TRANSIT_PG_DB", "transit_gpt")
 
-connection_string = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@localhost:{POSTGRES_PORT}/{POSTGRES_DB}"
+connection_string = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
 db = SQLDatabase.from_uri(connection_string)
 llm = ChatOpenAI(model="gpt-4o-mini")
