@@ -288,7 +288,7 @@ def main():
     print(f"Connecting to PostgreSQL database '{PG_DB}' as '{PG_USER}'...")
     conn = psycopg2.connect(
         dbname=PG_DB, user=PG_USER, password=PG_PASSWORD,
-        host="localhost", port=PG_PORT
+        host=os.getenv("PG_HOST", "localhost"), port=PG_PORT
     )
     cur = conn.cursor()
 
