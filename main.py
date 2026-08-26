@@ -37,7 +37,10 @@ prefix = SQL_PREFIX.format(
 
 system_message = SystemMessage(content=prefix)
 tools = setup_tools(db, llm)
-agent_executor = create_react_agent(llm, tools, prompt=system_message)
+try:
+    agent_executor = create_react_agent(llm, tools, prompt=system_message)
+except TypeError:
+    agent_executor = create_react_agent(llm, tools, messages_modifier=system_message)
 
 
 def extract_and_remove_html(text):
