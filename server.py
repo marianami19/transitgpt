@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, send_from_directory
 from main import process_question
 from dotenv import load_dotenv
 import os
@@ -44,6 +44,16 @@ def index():
         result=result,
         gmaps_api_key=os.getenv("GPLACES_API_KEY")
     )
+
+
+@app.route("/robots.txt")
+def robots():
+    return send_from_directory(app.static_folder, "robots.txt")
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    return send_from_directory(app.static_folder, "sitemap.xml", mimetype="application/xml")
 
 
 if __name__ == "__main__":
