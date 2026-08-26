@@ -31,3 +31,6 @@ Thumbs.db
 dist/
 build/
 *.egg-info/
+
+# Large database dumps — too big for GitHub
+*.sql
