@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — TransitGPT Canada</title>
+  <meta name="description" content="Frequently asked questions about travelling in Canada by transit, bus, train, and rideshare. A guide for newcomers to Canada." />
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background-color: #1a1a2e;
+      color: #d1d5db;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /* Nav */
+    .navbar {
+      width: 100%;
+      background-color: #0f172a;
+      border-bottom: 1px solid #1e3a5f;
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar-inner {
+      width: 100%;
+      max-width: 860px;
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      gap: 24px;
+    }
+    .navbar-brand {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+    .navbar a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+    }
+    .navbar a:hover, .navbar a.active {
+      color: #60a5fa;
+      border-bottom-color: #2563eb;
+    }
+
+    /* Page layout */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .page-header h1 {
+      color: #fff;
+      font-size: 1.8rem;
+      margin: 0 0 8px;
+    }
+    .page-header p {
+      color: #9ca3af;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Category label */
+    .category {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #60a5fa;
+      margin: 36px 0 12px;
+    }
+
+    /* Chat bubbles */
+    .chat {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .bubble {
+      max-width: 82%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .bubble.user {
+      align-self: flex-end;
+      background-color: #2563eb;
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bubble.bot {
+      align-self: flex-start;
+      background-color: #16213e;
+      color: #d1d5db;
+      border: 1px solid #1e3a5f;
+      border-bottom-left-radius: 4px;
+    }
+
+    .bubble.bot ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    .bubble.bot li {
+      margin-bottom: 4px;
+    }
+
+    .bubble.bot a {
+      color: #60a5fa;
+    }
+
+    .bubble.bot strong {
+      color: #93c5fd;
+    }
+
+    .try-it {
+      font-size: 0.78rem;
+      color: #4b5563;
+      text-align: right;
+      margin-top: 2px;
+      padding-right: 4px;
+    }
+
+    .try-it a {
+      color: #374151;
+      text-decoration: none;
+    }
+
+    .try-it a:hover {
+      color: #60a5fa;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px 12px 48px; }
+      .page-header h1 { font-size: 1.4rem; }
+      .bubble { max-width: 95%; font-size: 0.88rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-brand">🚌 TransitGPT</a>
+      <a href="/">Home</a>
+      <a href="/faq" class="active">FAQ</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Frequently Asked Questions</h1>
+      <p>New to Canada? Here's how to get around — answered as if you asked TransitGPT directly.</p>
+    </div>
+
+    <!-- GETTING STARTED -->
+    <div class="category">🇨🇦 Getting Started in Canada</div>
+
+    <div class="chat">
+      <div class="bubble user">I just moved to Canada. How do I use public transit?</div>
+      <div class="bubble bot">
+        Welcome to Canada! 🎉 Public transit here varies by city, but the basics are the same everywhere:<br><br>
+        <strong>Step 1:</strong> Find out which agency runs transit in your city (e.g. TTC in Toronto, STM in Montreal, TransLink in Vancouver).<br>
+        <strong>Step 2:</strong> Get a transit card. In Ontario, it's called a <strong>PRESTO card</strong> — you tap it on buses and subways instead of paying cash. Other cities have similar cards (Opus in Montreal, Compass in Vancouver).<br>
+        <strong>Step 3:</strong> Download the <strong>Transit app</strong> (transitapp.com) — it shows real-time arrivals for every city in Canada and is completely free.<br><br>
+        You can ask TransitGPT about any agency, route, or stop in Canada!
+      </div>
+    </div>
+
+    <div class="chat">
+      <div class="bubble user">What is a PRESTO card and where do I get one?</div>
+      <div class="bubble bot">
+        A <strong>PRESTO card</strong> is a reusable transit card used across Ontario (TTC, GO Transit, OC Transpo, and many more). Think of it like a tap-to-pay card just for transit.<br><br>
+        You can get one at:<br>
+        <ul>
+          <li>Any subway station in Toronto</li>
+          <li>Shoppers Drug Mart locations</li>
+          <li>Online at <a href="https://www.prestocard.ca" target="_blank">prestocard.ca</a></li>
+        </ul>
+        The card costs $6 and you load money onto it. Montreal uses the <strong>Opus card</strong> and Vancouver uses the <strong>Compass card</strong> — same idea, different names.
+      </div>
+    </div>
+
+    <!-- TRAVELLING BETWEEN CITIES -->
+    <div class="category">🚌 Travelling Between Cities</div>
+
+    <div class="chat">
+      <div class="bubble user">How do I travel from Toronto to Montreal?</div>
+      <div class="bubble bot">
+        Great question! Here are all your options:<br><br>
+        <strong>✈️ By Plane</strong> — Fastest option (~1.5 hrs). Check Air Canada, WestJet, or Porter Airlines.<br><br>
+        <strong>🚆 By Train</strong> — VIA Rail runs daily trains between Toronto Union Station and Montreal Central Station (~5 hrs). Book at <a href="https://www.viarail.ca" target="_blank">viarail.ca</a>.<br><br>
+        <strong>🚌 By Intercity Bus</strong> — Several options:
+        <ul>
+          <li><strong>FlixBus</strong> — flixbus.ca (affordable, book online)</li>
+          <li><strong>Megabus</strong> — ca.megabus.com (budget-friendly)</li>
+          <li><strong>Coach Canada</strong> — coachcanada.com</li>
+        </ul>
+        <strong>🚗 By Rideshare (carpooling)</strong> — Very popular on this route!
+        <ul>
+          <li><strong>KangRide</strong> — kangride.com (Canadian carpooling app)</li>
+          <li><strong>PopaRide</strong> — poparide.com (connect with drivers heading the same way)</li>
+          <li><strong>BlaBlaCar</strong> — blablacar.ca</li>
+        </ul>
+        <strong>🚗 By Car</strong> — About 5.5 hrs via Highway 401.
+      </div>
+      <div class="try-it"><a href="/">Ask TransitGPT this question →</a></div>
+    </div>
+
+    <div class="chat">
+      <div class="bubble user">How do I get from Toronto to Barrie?</div>
+      <div class="bubble bot">
+        <strong>🚆 By GO Train</strong> — The most popular option. Take the Barrie line from Union Station to Allandale Waterfront GO Station or Barrie South GO Station. Check schedules at <a href="https://www.gotransit.com" target="_blank">gotransit.com</a>.<br><br>
+        <strong>🚌 By Bus</strong>:
+        <ul>
+          <li><strong>Ontario Northland</strong> — ontarionorthland.ca (direct service)</li>
+          <li><strong>GO Bus</strong> — gotransit.com</li>
+        </ul>
+        <strong>🚗 By Rideshare</strong>:
+        <ul>
+          <li><strong>KangRide</strong> — kangride.com</li>
+          <li><strong>PopaRide</strong> — poparide.com</li>
+        </ul>
+        <strong>🚗 By Car</strong> — About 1.5 hrs via Highway 400.
+      </div>
+      <div class="try-it"><a href="/">Ask TransitGPT this question →</a></div>
+    </div>
+
+    <div class="chat">
+      <div class="bubble user">How do I travel from Vancouver to Victoria?</div>
+      <div class="bubble bot">
+        Victoria is on Vancouver Island, so you'll need to cross the water!<br><br>
+        <strong>⛴️ By Ferry (most popular)</strong> — BC Ferries runs from Tsawwassen terminal (near Vancouver) to Swartz Bay terminal (near Victoria). The ferry ride is about 1.5 hrs and very scenic. Book at <a href="https://www.bcferries.com" target="_blank">bcferries.com</a>.<br><br>
+        <strong>✈️ By Plane</strong> — Harbour Air runs seaplanes between downtown Vancouver and downtown Victoria (~35 mins). Check <a href="https://www.harbourair.com" target="_blank">harbourair.com</a>.<br><br>
+        Once in Victoria, BC Transit operates local buses. Check <a href="https://www.bctransit.com" target="_blank">bctransit.com</a>.
+      </div>
+      <div class="try-it"><a href="/">Ask TransitGPT this question →</a></div>
+    </div>
+
+    <!-- LOCAL TRANSIT -->
+    <div class="category">🚇 Local Transit in Major Cities</div>
+
+    <div class="chat">
+      <div class="bubble user">How do I use the subway in Toronto?</div>
+      <div class="bubble bot">
+        Toronto's subway is run by the <strong>TTC (Toronto Transit Commission)</strong>. There are 4 lines:<br>
+        <ul>
+          <li><strong>Line 1 (Yonge-University)</strong> — the main U-shaped line through downtown</li>
+          <li><strong>Line 2 (Bloor-Danforth)</strong> — runs east-west across the city</li>
+          <li><strong>Line 3 (Ontario)</strong> — newer extension to Scarborough</li>
+          <li><strong>Line 4 (Sheppard)</strong> — short line in north Toronto</li>
+        </ul>
+        Pay with a PRESTO card (tap on entry), tokens, or cash at station booths. One fare covers transfers to TTC buses and streetcars within 2 hours.<br><br>
+        📱 Download the TTC app or use <a href="https://www.ttc.ca" target="_blank">ttc.ca</a> for maps and schedules.
+      </div>
+      <div class="try-it"><a href="/">Ask TransitGPT this question →</a></div>
+    </div>
+
+    <div class="chat">
+      <div class="bubble user">How do I use the metro in Montreal?</div>
+      <div class="bubble bot">
+        Montreal's metro is run by the <strong>STM (Société de transport de Montréal)</strong> and has 4 lines:<br>
+        <ul>
+          <li><strong>Green line</strong> — east-west through downtown</li>
+          <li><strong>Orange line</strong> — the main north-south line</li>
+          <li><strong>Yellow line</strong> — connects downtown to the South Shore</li>
+          <li><strong>Blue line</strong> — serves the university area (Université de Montréal)</li>
+        </ul>
+        Get an <strong>Opus card</strong> at any metro station to pay. Single fares, daily passes, and monthly passes are all available.<br><br>
+        📱 Visit <a href="https://www.stm.info" target="_blank">stm.info</a> for maps and schedules.
+      </div>
+      <div class="try-it"><a href="/">Ask TransitGPT this question →</a></div>
+    </div>
+
+    <div class="chat">
+      <div class="bubble user">How does the SkyTrain work in Vancouver?</div>
+      <div class="bubble bot">
+        The <strong>SkyTrain</strong> is Vancouver's rapid transit system, operated by <strong>TransLink</strong>. It's elevated (above ground) and fully automated — no driver!<br><br>
+        There are 3 lines:
+        <ul>
+          <li><strong>Expo Line</strong> — downtown Vancouver to Surrey</li>
+          <li><strong>Millennium Line</strong> — connects Burnaby and Coquitlam</li>
+          <li><strong>Canada Line</strong> — connects downtown to YVR airport and Richmond</li>
+        </ul>
+        Pay with a <strong>Compass card</strong> (tap in AND tap out — very important or you get charged the maximum fare). You can also take TransLink buses and the SeaBus ferry with the same card.<br><br>
+        📱 Visit <a href="https://www.translink.ca" target="_blank">translink.ca</a> for trip planning.
+      </div>
+      <div class="try-it"><a href="/">Ask TransitGPT this question →</a></div>
+    </div>
+
+    <!-- RIDESHARE -->
+    <div class="category">🚗 Rideshare & Carpooling in Canada</div>
+
+    <div class="chat">
+      <div class="bubble user">What is KangRide and how do I use it?</div>
+      <div class="bubble bot">
+        <strong>KangRide</strong> (kangride.com) is a Canadian carpooling platform where drivers heading between cities offer seats to passengers for a shared cost. It's very popular for routes like Toronto → Ottawa, Toronto → Montreal, and many others.<br><br>
+        <strong>How it works:</strong>
+        <ul>
+          <li>Create a free account at <a href="https://kangride.com" target="_blank">kangride.com</a></li>
+          <li>Search for your route and date</li>
+          <li>Book a seat with a driver going your way</li>
+          <li>Pay a small fee (much cheaper than the bus or train)</li>
+        </ul>
+        It's safe, affordable, and a great way to meet people in Canada!
+      </div>
+    </div>
+
+    <div class="chat">
+      <div class="bubble user">What is PopaRide?</div>
+      <div class="bubble bot">
+        <strong>PopaRide</strong> (poparide.com) is another Canadian ridesharing app — especially popular in Quebec and Ontario. Drivers post trips and passengers can request a seat.<br><br>
+        It's great for intercity travel where buses are infrequent or expensive. Prices are set by drivers and are usually very reasonable.<br><br>
+        Sign up at <a href="https://www.poparide.com" target="_blank">poparide.com</a> — it's free to join.
+      </div>
+    </div>
+
+    <!-- TIPS FOR NEWCOMERS -->
+    <div class="category">💡 Tips for Newcomers</div>
+
+    <div class="chat">
+      <div class="bubble user">What apps should I download for transit in Canada?</div>
+      <div class="bubble bot">
+        Here are the must-have apps for getting around Canada:<br><br>
+        <ul>
+          <li><strong>Transit App</strong> (transitapp.com) — works in every Canadian city, shows real-time bus/subway arrivals</li>
+          <li><strong>Google Maps</strong> — great for trip planning with transit directions</li>
+          <li><strong>PRESTO</strong> — manage your PRESTO card and see balance (Ontario)</li>
+          <li><strong>STM</strong> — for Montreal metro and bus info</li>
+          <li><strong>TransLink</strong> — for Vancouver SkyTrain, bus, and SeaBus</li>
+          <li><strong>KangRide / PopaRide</strong> — for intercity carpooling</li>
+          <li><strong>VIA Rail</strong> — for booking national train travel</li>
+        </ul>
+        And of course — <strong>TransitGPT</strong> to ask any transit question in plain English! 😊
+      </div>
+    </div>
+
+    <div class="chat">
+      <div class="bubble user">Is transit free for seniors or students in Canada?</div>
+      <div class="bubble bot">
+        Discounts vary by city and agency, but here are common ones:<br><br>
+        <strong>Students:</strong> Most agencies offer discounted monthly passes with a valid student ID. Ask your school's student union — many universities have U-Pass programs that include unlimited transit in the tuition fee.<br><br>
+        <strong>Seniors (65+):</strong> Most agencies offer discounted or free rides during off-peak hours. For example, TTC offers a Senior discount fare.<br><br>
+        <strong>Children:</strong> Children under 12 ride free on most Canadian transit systems.<br><br>
+        Check your local agency's website for current discount programs.
+      </div>
+    </div>
+
+    <div class="chat">
+      <div class="bubble user">Can I take transit to the airport in Canada?</div>
+      <div class="bubble bot">
+        Yes! Most major Canadian airports have transit connections:<br><br>
+        <ul>
+          <li><strong>Toronto (YYZ)</strong> — UP Express train from Union Station (~25 min), or TTC bus routes</li>
+          <li><strong>Montreal (YUL)</strong> — STM Bus 747 runs 24/7 between downtown and the airport</li>
+          <li><strong>Vancouver (YVR)</strong> — Canada Line SkyTrain goes directly to the airport from downtown (~26 min)</li>
+          <li><strong>Ottawa (YOW)</strong> — OC Transpo Route 97 connects to the airport</li>
+          <li><strong>Calgary (YYC)</strong> — CTrain Red Line connects to the airport</li>
+        </ul>
+        Ask TransitGPT for specific stop info for any of these cities!
+      </div>
+      <div class="try-it"><a href="/">Ask TransitGPT this question →</a></div>
+    </div>
+
+  </div>
+
+</body>
+</html>
