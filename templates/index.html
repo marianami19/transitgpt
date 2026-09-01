@@ -315,6 +315,29 @@
       -webkit-overflow-scrolling: touch;
     }
 
+    /* --- Background questions --- */
+    #bg-questions {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    #bg-questions span {
+      position: absolute;
+      color: #60a5fa;
+      opacity: 0.055;
+      font-size: 0.82rem;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .container, .navbar, footer, .loader-overlay {
+      position: relative;
+      z-index: 1;
+    }
+
     /* --- Loader --- */
     .loader-overlay {
       display: none;
@@ -407,6 +430,8 @@
 </head>
 
 <body>
+  <div id="bg-questions"></div>
+
   <div class="loader-overlay" id="loader">
     <div class="spinner"></div>
     <p>Finding transit information...</p>
@@ -515,6 +540,51 @@
     </form>
   </footer>
   <script>
+    (function () {
+      const questions = [
+        "How do I get from Toronto to Montreal?",
+        "What buses run near me in Vancouver?",
+        "Does TTC run on Sundays?",
+        "How many routes does TransLink have?",
+        "Show GO Transit stations on a map",
+        "How do I get to Pearson Airport by transit?",
+        "What subway lines exist in Canada?",
+        "Which agencies operate in British Columbia?",
+        "Find transit stops near CN Tower",
+        "What is the cheapest way to get from Calgary to Edmonton?",
+        "How do I use a PRESTO card?",
+        "What ferry services are in Vancouver?",
+        "Show me a map of STM routes in Montreal",
+        "How far is Union Station from Bloor?",
+        "What bus goes to Wasaga Beach?",
+        "Does GO Transit run on weekends?",
+        "How do I get to Niagara Falls by transit?",
+        "What is the route from Ottawa to Kingston?",
+        "Show all TTC streetcar routes",
+        "Which province has the most transit agencies?",
+        "How do I get from Halifax to Dartmouth?",
+        "What are the SkyTrain lines in Vancouver?",
+        "Is there a bus from Barrie to Toronto?",
+        "What transit options are there in Winnipeg?",
+        "How do I get from Quebec City to Montreal?",
+        "Show me agencies in Nova Scotia",
+        "How long does it take to get from Brampton to downtown Toronto?",
+        "What routes does OC Transpo have in Ottawa?",
+        "How do I travel from Saskatoon to Regina?",
+        "What is the best way to get around as a newcomer in Canada?",
+      ];
+      const bg = document.getElementById('bg-questions');
+      const count = 55;
+      for (let i = 0; i < count; i++) {
+        const span = document.createElement('span');
+        span.textContent = questions[i % questions.length];
+        span.style.left = Math.random() * 100 + '%';
+        span.style.top = Math.random() * 100 + '%';
+        span.style.transform = `rotate(${Math.random() * 50 - 25}deg)`;
+        bg.appendChild(span);
+      }
+    })();
+
     document.querySelector('form.question-form').addEventListener('submit', function () {
       document.getElementById('loader').classList.add('active');
     });
