@@ -121,7 +121,23 @@ class GenerateDirectionsMapTool(BaseTool):
     args_schema: type = DirectionsMapInput
 
     def _run(self, origin_address, destination_address, origin_lat, origin_lng):
-        html = f"""<div id="map" style="height: 500px; width: 100%;"></div>
+        import urllib.parse
+        gmaps_url = (
+            "https://www.google.com/maps/dir/?api=1"
+            f"&origin={urllib.parse.quote(origin_address)}"
+            f"&destination={urllib.parse.quote(destination_address)}"
+            "&travelmode=transit"
+        )
+        html = f"""<div id="map" style="height: 400px; width: 100%; border-radius: 10px; overflow: hidden;"></div>
+<a href="{gmaps_url}" target="_blank" rel="noopener noreferrer"
+   style="display:inline-flex; align-items:center; gap:8px; margin-top:10px; padding:10px 18px;
+          background:#2563eb; color:#fff; text-decoration:none; border-radius:8px;
+          font-size:0.9rem; font-weight:600;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 5.125 0 7.55 0 8a8 8 0 1 0 16 0c0-.45-1.266-2.875-2.942-4.275-.143-.863-.698-1.723-1.464-2.383A5.53 5.53 0 0 0 8 0zm0 1.5a4.03 4.03 0 0 1 2.607.976c.543.47.877 1.052.877 1.524 0 1.4-1.555 2.5-3.484 2.5-1.93 0-3.484-1.1-3.484-2.5 0-.472.334-1.053.877-1.524A4.03 4.03 0 0 1 8 1.5z"/>
+  </svg>
+  Open in Google Maps
+</a>
 <script>
 function initMap() {{
     const map = new google.maps.Map(document.getElementById('map'), {{
