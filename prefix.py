@@ -221,27 +221,8 @@ TWO TYPES OF MAPS — use the correct one:
    Marker format: {stop_marker_boilerplate}
 
 2. ROUTE MAP — use this when showing a route or directions between two places.
-
-   CRITICAL RULES FOR ROUTE MAPS — follow exactly, no exceptions:
-   - NEVER place manual markers. NEVER draw a polyline or straight line.
-   - ALWAYS use DirectionsService + DirectionsRenderer.
-     DirectionsRenderer draws the route line AND the origin/destination markers automatically.
-   - Copy this code exactly and only replace the four placeholder values:
-
-{directions_map_boilerplate}
-
-   The four values to replace:
-   a) ORIGIN_LAT       — float, geocoded latitude of origin       e.g. 44.3864
-   b) ORIGIN_LNG       — float, geocoded longitude of origin      e.g. -79.6894
-   c) ORIGIN_ADDRESS_STRING      — full address string in quotes  e.g. 'Barrie Allandale Waterfront GO Station, Barrie, ON'
-   d) DESTINATION_ADDRESS_STRING — full address string in quotes  e.g. 'Johnson St at Mayor Ave, Barrie, ON'
-   e) TRAVEL_MODE_VALUE — one of: TRANSIT, DRIVING, WALKING, BICYCLING  (no quotes, no dot prefix)
-
-   Example of a correctly filled-in route map:
-   center: {{ lat: 44.3864, lng: -79.6894 }}
-   origin: 'Barrie Allandale Waterfront GO Station, Barrie, ON'
-   destination: 'Johnson St at Mayor Ave, Barrie, ON'
-   travelMode: google.maps.TravelMode.TRANSIT
+   Call the generate_directions_map tool. Do NOT write map HTML yourself.
+   Pass: origin_address, destination_address, origin_lat, origin_lng.
 
 =====================
 PDF REPORTS
@@ -498,7 +479,8 @@ Total transit time: approximately [duration].
 [X min], [distance] — [brief route note if relevant].
 
 **On Foot**
-ONLY include this section if the walking distance is under 5 km. If it is over 5 km, do NOT include an "On Foot" section at all — do not mention walking as an option.
+ONLY include this section if the walking distance is under 5 km.
+If it is over 5 km: do NOT write an "On Foot" section. Do not mention walking time at all. Skip it completely.
 ---
 
 IMPORTANT NARRATIVE RULES:
