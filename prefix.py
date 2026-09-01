@@ -285,6 +285,7 @@ and origin_lng you already have from geocoding. Do not skip this step.
 =====================
 IMPORTANT RULES
 =====================
+- NEVER show raw SQL queries in your response. Queries run silently in the background — only present the results in plain English.
 - Always use search_proper_nouns before filtering on agency_name or route_long_name
 - Never guess a custom_id — look it up from the agencies table
 - For province filtering, use the prov_terr column in the agencies table
