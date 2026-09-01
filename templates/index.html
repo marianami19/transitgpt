@@ -315,6 +315,43 @@
       -webkit-overflow-scrolling: touch;
     }
 
+    /* --- Loader --- */
+    .loader-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 26, 46, 0.88);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .loader-overlay.active {
+      display: flex;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #1e3a5f;
+      border-top-color: #2563eb;
+      border-radius: 50%;
+      animation: spin 0.85s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loader-overlay p {
+      color: #93c5fd;
+      font-size: 1rem;
+      margin: 0;
+      font-weight: 500;
+    }
+
     /* --- Mobile --- */
     @media (max-width: 600px) {
       .container {
@@ -370,6 +407,11 @@
 </head>
 
 <body>
+  <div class="loader-overlay" id="loader">
+    <div class="spinner"></div>
+    <p>Finding transit information...</p>
+  </div>
+
   <nav class="navbar">
     <div class="navbar-inner">
       <a href="/" class="navbar-brand">TransitGPT</a>
@@ -473,6 +515,10 @@
     </form>
   </footer>
   <script>
+    document.querySelector('form.question-form').addEventListener('submit', function () {
+      document.getElementById('loader').classList.add('active');
+    });
+
     function copyAnswer() {
       const card = document.getElementById('answer-card');
       const text = card.innerText.replace('Copy\nShare', '').trim();
