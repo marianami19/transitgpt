@@ -235,6 +235,28 @@
       background-color: #4b5563;
     }
 
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #1e3a5f;
+    }
+
+    .card-actions button {
+      background: #0f172a;
+      border: 1px solid #1e3a5f;
+      color: #93c5fd;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.82rem;
+    }
+
+    .card-actions button:hover {
+      background-color: #1e3a5f;
+    }
+
     /* --- Nav bar --- */
     .navbar {
       width: 100%;
@@ -416,11 +438,15 @@
     </form>
 
     {% if result %}
-    <div class="result">
+    <div class="result" id="answer-card">
       <h2>Answer</h2>
       {% for res in result %}
       <p>{{ res }}</p>
       {% endfor %}
+      <div class="card-actions">
+        <button onclick="copyAnswer()">Copy</button>
+        <button onclick="shareAnswer()">Share</button>
+      </div>
     </div>
     {% endif %}
 
@@ -446,5 +472,30 @@
       <input type="submit" value="Clear Conversation" />
     </form>
   </footer>
+  <script>
+    function copyAnswer() {
+      const card = document.getElementById('answer-card');
+      const text = card.innerText.replace('Copy\nShare', '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = card.querySelector('button');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      });
+    }
+
+    function shareAnswer() {
+      const card = document.getElementById('answer-card');
+      const text = card.innerText.replace('Copy\nShare', '').trim();
+      if (navigator.share) {
+        navigator.share({ title: 'TransitGPT Canada', text: text, url: window.location.href });
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const btns = card.querySelectorAll('button');
+          btns[1].textContent = 'Link copied!';
+          setTimeout(() => btns[1].textContent = 'Share', 2000);
+        });
+      }
+    }
+  </script>
 </body>
 </html>

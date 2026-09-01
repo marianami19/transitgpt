@@ -104,8 +104,55 @@ class DirectionsTool(BaseTool):
             return f"An error occurred: {str(e)}"
 
 
+class DirectionsMapInput(BaseModel):
+    origin_address: str = Field(..., description="Full address string of the origin")
+    destination_address: str = Field(..., description="Full address string of the destination")
+    origin_lat: float = Field(..., description="Latitude of the origin from geocoding")
+    origin_lng: float = Field(..., description="Longitude of the origin from geocoding")
+
+
+class GenerateDirectionsMapTool(BaseTool):
+    name: str = "generate_directions_map"
+    description: str = (
+        "Generates an interactive Google Maps route map between two locations. "
+        "Call this after getting directions for any travel question. "
+        "Requires the origin and destination addresses and the origin lat/lng from geocoding."
+    )
+    args_schema: type = DirectionsMapInput
+
+    def _run(self, origin_address, destination_address, origin_lat, origin_lng):
+        html = f"""<div id="map" style="height: 500px; width: 100%;"></div>
+<script>
+function initMap() {{
+    const map = new google.maps.Map(document.getElementById('map'), {{
+        zoom: 7,
+        center: {{ lat: {origin_lat}, lng: {origin_lng} }}
+    }});
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer({{ map: map }});
+    directionsService.route(
+        {{
+            origin: '{origin_address}',
+            destination: '{destination_address}',
+            travelMode: google.maps.TravelMode.TRANSIT
+        }},
+        function(result, status) {{
+            if (status === 'OK') {{
+                directionsRenderer.setDirections(result);
+            }} else {{
+                console.error('Directions failed: ' + status);
+            }}
+        }}
+    );
+}}
+initMap();
+</script>"""
+        return f"```html\n{html}\n```"
+
+
 directions_tool = DirectionsTool()
 geocoding_tool = GeocodingTool()
+directions_map_tool = GenerateDirectionsMapTool()
 
 
 def query_as_list(db, query):
@@ -140,4 +187,5 @@ def setup_tools(db, llm):
     tools.append(google_places)
     tools.append(geocoding_tool)
     tools.append(directions_tool)
+    tools.append(directions_map_tool)
     return tools

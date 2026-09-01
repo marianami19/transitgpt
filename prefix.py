@@ -473,7 +473,16 @@ STEP 3 — Find the nearest stops in our database (for stop codes and agency inf
 STEP 4 — Get driving and walking times.
   Call google_maps_directions(mode="driving") and google_maps_directions(mode="walking").
 
-STEP 5 — Write the answer in this narrative format:
+STEP 5 — Generate a route map.
+  Call the generate_directions_map tool with:
+    - origin_address: the full address string of the origin (as returned by geocoding)
+    - destination_address: the full address string of the destination
+    - origin_lat: the geocoded latitude of the origin (float)
+    - origin_lng: the geocoded longitude of the origin (float)
+  This step is NOT optional — you MUST call generate_directions_map for every directions question.
+  Do not write map HTML yourself — always use the tool.
+
+STEP 6 — Write the answer in this narrative format:
 
 ---
 **By Transit**
@@ -506,6 +515,7 @@ Substitute the returned lat/lon floats directly as numeric literals — never us
 {directions_sql_boilerplate}
 
 Use the stop_name and stop_code from the query results inside your narrative.
-If no matching stops are found in the database, skip the stop code detail and rely on
+If no stop_code is found, simply omit it — never say "stop code not available" or anything similar.
+If no matching stops are found in the database, skip the stop code detail entirely and rely on
 the Google Maps transit step names alone.
 """
