@@ -519,7 +519,7 @@
 
     {% if session.get('conversation_history') %}
     <div class="conversation-history">
-      <h2>Conversation History</h2>
+      <h2>Conversation History:</h2>
       {% for entry in session['conversation_history'] %}
       <div class="conversation-entry">
         <p class="question">Q: {{ entry.question }}</p>
